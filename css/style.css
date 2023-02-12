@@ -736,16 +736,16 @@ h6 a:hover{
 }
 .logo-box{
   background: url(../images/logo/logo1.png) no-repeat 9% 100%;
-  height: 150px;
-  width: 500px;
+  height: 70px;
+  width: 300px;
   display: inline-block;
   margin-top: auto;
   margin-bottom: auto;
 }
 .logo-box a {
   display: inline-block;
-  width: 100%;
-  height: 100%;
+  width: 20%;
+  height: auto;
 }
 .logo-area{
   padding: 45px 0px 54px 0px;
