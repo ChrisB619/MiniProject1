@@ -13,6 +13,60 @@
 <link type="text/css" rel="stylesheet" id="jssDefault" href="css/custom/theme-2.css"/>
 <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
+<script src="https://apis.google.com/js/api.js"></script>
+  <script>
+    function sendToGoogleSheets() {
+      // Get the form values
+      var name = document.getElementById("name").value;
+      var age = document.getElementById("age").value;
+      var address = document.getElementById("address").value;
+      var contact = document.getElementById("contact").value;
+      var promo = document.getElementById("promo").value;
+      var subscription = document.querySelector('input[name="subscription"]:checked').value;
+      var comments = document.getElementById("comments").value;
+
+      // Add the form data to the Google Sheet
+      gapi.client.sheets.spreadsheets.values.append({
+        spreadsheetId: '1M61TX8sEUwW2HwiUzLhLS9JZJHYofAu31EU1GaCaGo8',
+        range: 'Sheet1!A1',
+        valueInputOption: 'USER_ENTERED',
+        resource: {
+          values: [[name, age, address, contact, promo, subscription, comments]]
+        },
+      }).then((response) => {
+        console.log(response);
+        alert("Form submitted successfully!");
+      }, (error) => {
+        console.error(error);
+        alert("An error occurred. Please try again later.");
+      });
+    }
+
+    function initClient() {
+      gapi.client.init({
+        apiKey: 'AIzaSyC5kDSWPmttP4KPw8gHVxCa6_bM25rYNyM',
+        discoveryDocs: ['https://sheets.googleapis.com/$discovery/rest?version=v4'],
+        clientId: 'miniproject1-377914',
+        scope: 'https://www.googleapis.com/auth/spreadsheets',
+      }).then(() => {
+        console.log('Google Sheets API initialized');
+      }, (error) => {
+        console.error('Error initializing Google Sheets API:', error);
+      });
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault(); // Prevent the form from submitting normally
+      sendToGoogleSheets();
+      document.getElementById("subscription-form").reset(); // Clear the form fields
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      gapi.load('client', initClient);
+      document.getElementById("subscription-form").addEventListener("submit", handleFormSubmit);
+    });
+  </script>
+
 </head>
 
 <!-- page wrapper -->
@@ -72,7 +126,7 @@
         </div>
     </div>
     <!-- color stitcher style end -->
-
+    
 
     <!-- menu-area -->
     <header class="main-header">
@@ -83,8 +137,8 @@
             <div class="container">
                 <div class="logo-box">
                     <a href="index.html"></a>
-                </div>
-                <!--<div class="header-info">
+                <!--</div>
+                <div class="header-info">
                     <div class="single-info">
                         <div class="icon-box"><i class="fa fa-envelope"></i></div>
                         <div class="text">allan619@gmail.com</div>
@@ -130,7 +184,7 @@
                                     </ul>
                                 </li>
                                 <li><a href="price.html">Pricing</a></li>
-                                <li class="current dropdown"><a href="#">Blog</a>
+                                <li class="dropdown"><a href="#">Blog</a>
                                     <ul class="submenu">
                                         <li><a href="blog-grid.html">Blog Grid</a></li>
                                         <li><a href="blog-left.html">Blog Left Column</a></li>
@@ -138,7 +192,7 @@
                                         <li><a href="blog-details.html">Blog Single</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li class="current"><a href="contact.html">Contact</a></li>
                             </ul>
 
 
@@ -189,145 +243,64 @@
     </header>
     <!-- end menu-area -->
 
-
-    <!-- page title -->
-    <section class="page-title centred">
+    <!-- contact-section -->
+    <section class="contact-section sp-one">
         <div class="container">
-            <div class="content-box">
-                <div class="title"><h2>blog right sidebar</h2></div>
-            </div>
-        </div>
-    </section>
-    <!--End Page Title-->
-    
-
-    <!-- blog-classic -->
-    <section class="blog-classic blog-right-sidbar sidbar-page-container">
-        <div class="container">
+            <div class="sec-title centred"><h2>Contact us</h2></div>
+            <div class="title-text centred">LaundryBee comes to your household providing the best of the comforts in Laundry Service with latest technology in your community.<br /> All our employees are well trained with training programs conducted at regular intervals. We provide high quality dry cleaning,<br /> washing, and ironing services from top-notch facilities, High-end equipment.</div>
             <div class="row">
-                <div class="col-md-8 col-sm-12 col-xs-12 content-side">
-                    <div class="blog-classic-content default-blog-content">
-                        <div class="single-blog-content">
-                            <div class="img-box"><a href="blog-details.html"><figure><img src="images/news/1.jpg" alt=""></figure></a></div>
-                            <div class="lower-content">
-                                <ul class="meta in-block">
-                                    <li>Posted By : Jhon Doe</li>
-                                    <li>17 Jan, 2014</li>
-                                    <li><i class="fa fa-comment-o"></i>&nbsp;&nbsp;Comments (25)</li>
-                                </ul>
-                                <div class="title"><h3><a href="blog-details.html">101 Lanundry tips, tricks and hacks</a></h3></div>
-                                <div class="text">
-                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia aliquam quaerat voluptatem.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-blog-content">
-                            <div class="img-box"><a href="blog-details.html"><figure><img src="images/news/2.jpg" alt=""></figure></a></div>
-                            <div class="lower-content">
-                                <ul class="meta in-block">
-                                    <li>Posted By : Jhon Doe</li>
-                                    <li>17 Jan, 2014</li>
-                                    <li><i class="fa fa-comment-o"></i>&nbsp;&nbsp;Comments (25)</li>
-                                </ul>
-                                <div class="title"><h3><a href="blog-details.html">4 Ways to Simplify Laundry</a></h3></div>
-                                <div class="text">
-                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia aliquam quaerat voluptatem.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-blog-content">
-                            <div class="img-box"><a href="blog-details.html"><figure><img src="images/news/3.jpg" alt=""></figure></a></div>
-                            <div class="lower-content">
-                                <ul class="meta in-block">
-                                    <li>Posted By : Jhon Doe</li>
-                                    <li>17 Jan, 2014</li>
-                                    <li><i class="fa fa-comment-o"></i>&nbsp;&nbsp;Comments (25)</li>
-                                </ul>
-                                <div class="title"><h3><a href="blog-details.html">A guide to home stain removal</a></h3></div>
-                                <div class="text">
-                                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia aliquam quaerat voluptatem.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <ul class="link-btn float-right">
-                            <li><a href="#"><i class="fa fa-angle-double-left"></i></a></li>
-                            <li><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#" class="active">4</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                        </ul>
+                <div class="col-md-5 col-sm-6 col-xs-12 contact-column">
+                    <div class="contact-info">
                     </div>
                 </div>
-                <div class="col-md-4 col-sm-6 col-xs-12 sidebar-side">
-                    <div class="sidebar">
-                        <div class="sidebar-search sidebar-widget">
-                            <div class="input-box">
-                                <form action="#">
-                                    <input type="text" placeholder="Search">
-                                    <button><i class="fa fa-search"></i></button>
-                                </form>
+                <div class="col-md-7 col-sm-8 col-xs-12 contact-column">
+                    <div class="contact-form-area">
+                        <h3>Get In Touch</h3>
+                        <div class="text">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</div>
+                        <form id="subscription-form">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label for="name">Name:</label>
+                                    <input type="text" id="name" name="name" required>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <label for="age">Age:</label>
+                                    <input type="number" id="age" name="age" required>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <label for="address">Address:</label>
+                                    <input type="text" id="address" name="address" required>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <label for="contact">Contact Number:</label>
+                                    <input type="tel" id="contact" name="contact" required>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label for="promo">Promo Code:</label>
+                                    <input type="text" name="promo">
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label for="subscription">Subscription Type:</label>
+                                    <select name="subscription">
+                                        <option value="one-time">One Time Service</option>
+                                        <option value="monthly">Monthly Subscription</option>
+                                        <option value="six-month">6 Month Subscription</option>
+                                        <option value="one-year">1 Year Subscription</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <label for="comments">Comments:</label><br>
+                                    <textarea name="comments"></textarea><br><br>
+                                </div>
                             </div>
-                        </div>
-                        <div class="sidebar-archives sidebar-widget">
-                            <div class="sidbar-title"><h3>Archives</h3></div>
-                            <ul class="archive-list">
-                                <li><a href="#">April 2015</a></li>
-                                <li><a href="#">June 2015</a></li>
-                                <li><a href="#">March 2016</a></li>
-                                <li><a href="#">January 2017</a></li>
-                                <li><a href="#">February 2017</a></li>
-                            </ul>
-                        </div>
-                        <div class="sidbar-post sidebar-widget">
-                            <div class="sidbar-title"><h3>Recent Post</h3></div>
-                            <div class="single-post">
-                                <div class="img-box"><a href="blog-details.html"><figure><img src="images/news/p1.png" alt=""></figure></a></div>
-                                <h4><a href="blog-details.html">Safe Environment for Doing Laundry</a></h4>
-                                <div class="text">17 Jan, 2014</div>
-                            </div>
-                            <div class="single-post">
-                                <div class="img-box"><a href="blog-details.html"><figure><img src="images/news/p2.png" alt=""></figure></a></div>
-                                <h4><a href="blog-details.html">Kids Clothing Wash and Dry</a></h4>
-                                <div class="text">17 Jan, 2014</div>
-                            </div>
-                            <div class="single-post">
-                                <div class="img-box"><a href="blog-details.html"><figure><img src="images/news/p3.png" alt=""></figure></a></div>
-                                <h4><a href="blog-details.html">Safe Environment for Doing Laundry</a></h4>
-                                <div class="text">17 Jan, 2014</div>
-                            </div>
-                            <div class="single-post">
-                                <div class="img-box"><a href="blog-details.html"><figure><img src="images/news/p4.png" alt=""></figure></a></div>
-                                <h4><a href="blog-details.html">Dry cleaning saves money in the long run</a></h4>
-                                <div class="text">17 Jan, 2014</div>
-                            </div>
-                        </div>
-                        <div class="sidebar-categories sidebar-widget">
-                            <div class="sidbar-title"><h3>Categories</h3></div>
-                            <ul class="categories-list">
-                                <li><a href="#">Business Laundry (3)</a></li>
-                                <li><a href="#">Industry Laundry(12)</a></li>
-                                <li><a href="#">Redential Laundry (5)</a></li>
-                                <li><a href="#">Cosplay Laundry (1)</a></li>
-                            </ul>
-                        </div>
-                        <div class="sidebar-twitter sidebar-widget">
-                            <div class="sidbar-title"><h3>Twitter</h3></div>
-                            <ul class="list in-block">
-                                <li><a href="#"><img src="images/news/t1.png" alt=""></a></li>
-                                <li><a href="#"><img src="images/news/t2.png" alt=""></a></li>
-                                <li><a href="#"><img src="images/news/t3.png" alt=""></a></li>
-                                <li><a href="#"><img src="images/news/t4.png" alt=""></a></li>
-                                <li><a href="#"><img src="images/news/t5.png" alt=""></a></li>
-                                <li><a href="#"><img src="images/news/t6.png" alt=""></a></li>
-                            </ul>
-                        </div>
+                            <div class="contact-btn"><input type="submit" value="Submit"></div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- blog-classic end -->
+    <!-- contact-section end -->
 
 
     <!-- main-footer -->
@@ -400,7 +373,7 @@
         <div class="footer-bottom centred">
             <div class="container">
                 <div class="container">
-                    <div class="copyright">© 2018 <a href="#">Watertown</a>. All Rights Reserved.</div>
+                    <div class="copyright">© 2018 <a href="#">LaundryBee</a>. All Rights Reserved.</div>
                 </div>
             </div>
         </div>
@@ -463,6 +436,5 @@
 
 
 <script src="js/script.js"></script>
-
 </body><!-- End of .page_wrapper -->
 </html>
